@@ -29,7 +29,7 @@
         "noConnection": "ネットワーク接続がありません"
     },
     "applicationItem": {
-        "patchButton": "パッチ",
+        "patchButton": "適用",
         "infoButton": "情報",
         "changelogLabel": "更新履歴"
     },
