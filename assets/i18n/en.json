@@ -42,7 +42,7 @@
     },
     "patcherView": {
         "widgetTitle": "Patcher",
-        "patchButton": "パッチ",
+        "patchButton": "適用",
         "patchDialogTitle": "警告",
         "patchDialogText": "リソースパッチとAPKの分割インストールが検出されました、パッチ適用時にエラーが発生する可能性があります。\n分割されたベースAPKにパッチを適用しますか？"
     },
@@ -121,9 +121,12 @@
         "widgetTitle": "アプリ情報",
         "openButton": "開く",
         "uninstallButton": "アンインストール",
-        "patchButton": "パッチ",
+        "patchButton": "適用",
+        "unpatchButton": "パッチ解除",
         "uninstallDialogTitle": "アンインストール",
         "uninstallDialogText": "選択したアプリケーションをアンインストールしますか？",
+        "unpatchDialogTitle": "パッチ解除",
+        "unpatchDialogText": "選択したアプリケーションに適用されているパッチを解除しますか？",
         "rootDialogTitle": "エラー",
         "rootDialogText": "アプリは端末がルート化された状態でインストールされましたが、現在はルート化が解除されているようです。\n再度、ルート化してから実行してください。",
         "packageNameLabel": "パッケージ名",
