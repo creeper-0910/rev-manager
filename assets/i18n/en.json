@@ -14,7 +14,7 @@
         "widgetTitle": "ダッシュボード",
         "updatesSubtitle": "アップデート",
         "patchedSubtitle": "パッチ適用済のアプリケーション",
-        "updatesAvailable": "更新があります",
+        "updatesAvailable": "利用可能な更新",
         "noUpdates": "更新はありません",
         "noInstallations": "パッチ適用済のアプリケーションはインストールされていません",
         "installed": "インストール済",
@@ -51,6 +51,9 @@
         "widgetTitleSelected": "アプリケーション選択済",
         "widgetSubtitle": "アプリケーションが選択されていません。",
         "noAppsLabel": "アプリケーションが見つかりませんでした。"
+        "currentVersion": "現在",
+        "recommendedVersion": "推奨",
+        "anyVersion": "any"
     },
     "patchSelectorCard": {
         "widgetTitle": "パッチの選択",
