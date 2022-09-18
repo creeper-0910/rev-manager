@@ -103,6 +103,15 @@ class SettingsViewModel extends BaseViewModel {
               Navigator.of(context).pop();
             },
           ),
+          RadioListTile<String>(
+            title: I18nText('settingsView.JapaneseOption'),
+            value: 'ja',
+            groupValue: 'ja',
+            onChanged: (value) {
+              updateLanguage(context, value);
+              Navigator.of(context).pop();
+            },
+          ),
         ],
       ),
     );

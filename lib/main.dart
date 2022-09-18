@@ -35,6 +35,10 @@ class MyApp extends StatelessWidget {
             fallbackFile: 'en',
             basePath: 'assets/i18n',
           ),
+          translationLoader: FileTranslationLoader(
+            fallbackFile: 'ja',
+            basePath: 'assets/i18n',
+          ),
         ),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate

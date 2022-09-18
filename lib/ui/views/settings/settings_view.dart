@@ -90,6 +90,11 @@ class SettingsView extends StatelessWidget {
                       subtitle: 'English',
                       onTap: () => model.showLanguagesDialog(context),
                     ),
+                    SettingsTileDialog(
+                      title: 'settingsView.languageLabel',
+                      subtitle: 'Japanese',
+                      onTap: () => model.showLanguagesDialog(context),
+                    ),
                     const Divider(thickness: 1.0),
                     SettingsSection(
                       title: 'settingsView.patcherSectionTitle',
