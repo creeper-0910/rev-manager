@@ -3,8 +3,8 @@
     "cancelButton": "キャンセル",
     "enabledLabel": "有効",
     "disabledLabel": "無効",
-    "yesLabel": "はい",
-    "noLabel": "いいえ",
+    "yesButton": "はい",
+    "noButton": "いいえ",
     "navigationView": {
         "dashboardTab": "ダッシュボード",
         "patcherTab": "パッチの適用",
@@ -66,11 +66,13 @@
         "widgetSubtitle": "私たちはオンラインです!"
     },
     "appSelectorView": {
-        "searchBarHint": "アプリケーションの選択",
+        "viewTitle": "アプリケーションの選択",
+        "searchBarHint": "アプリケーションの検索",
         "storageButton": "ストレージ",
         "errorMessage": "選択したアプリケーションは使用できません。"
     },
     "patchesSelectorView": {
+    	"viewTitle": "パッチの選択",
         "searchBarHint": "パッチの検索",
         "doneButton": "完了",
         "noPatchesFound": "選択したアプリのパッチは見つかりませんでした。"
@@ -89,7 +91,11 @@
         "notificationTitle": "ReVanced Managerはパッチを適用しています",
         "notificationText": "タップするとインストーラーに戻ります",
         "shareApkMenuOption": "APKを共有",
-        "shareLogMenuOption": "logを共有"
+        "shareLogMenuOption": "logを共有",
+        "installErrorDialogTitle": "エラー",
+        "installErrorDialogText1": "現在選択されているパッチでは、ルートインストールはできません。\nアプリを再パッチするか、非ルートインストールを選択してください。",
+        "installErrorDialogText2": "現在選択されているパッチでは、非ルートインストールはできません。\nアプリを再パッチするか、デバイスをルート化した後、ルートインストールを選択してください。",
+        "installErrorDialogText3": "ストレージからオリジナルAPKを選択したため、ルートインストールはできません。\nインストールされているアプリを選択するか、非ルートインストールを選択します。"
     },
     "settingsView": {
         "widgetTitle": "設定",
@@ -97,6 +103,7 @@
         "patcherSectionTitle": "Patcher",
         "teamSectionTitle": "チーム",
         "infoSectionTitle": "情報",
+        "advancedSectionTitle": "高度な機能",
         "darkThemeLabel": "ダークモード",
         "darkThemeHint": "ダークサイドへようこそ",
         "dynamicThemeLabel": "Material You",
@@ -113,10 +120,14 @@
         "sourcesIntegrationsLabel": "Integrationsのソース",
         "sourcesResetDialogTitle": "リセット",
         "sourcesResetDialogText": "カスタム ソースをデフォルト値にリセットしてもよろしいですか?",
+        "apiURLResetDialogText": "APIのURLをデフォルト値にリセットしてもよろしいですか？",
         "contributorsLabel": "貢献者",
         "contributorsHint": "ReVancedへの貢献者一覧",
         "logsLabel": "ログ",
         "logsHint": "デバイスのデバッグログを共有",
+        "apiURLLabel": "API URL",
+        "apiURLHint": "カスタムAPI URLの設定",
+        "selectApiURL": "URLを選択",
         "aboutLabel": "詳細",
         "snackbarMessage": "クリップボードにコピーしました"
     },
@@ -126,9 +137,6 @@
         "uninstallButton": "アンインストール",
         "patchButton": "適用",
         "unpatchButton": "パッチ解除",
-        "uninstallDialogTitle": "アンインストール",
-        "uninstallDialogText": "選択したアプリケーションをアンインストールしますか？",
-        "unpatchDialogTitle": "パッチ解除",
         "unpatchDialogText": "選択したアプリケーションに適用されているパッチを解除しますか？",
         "rootDialogTitle": "エラー",
         "rootDialogText": "アプリは端末がルート化された状態でインストールされましたが、現在はルート化が解除されているようです。\n再度、ルート化してから実行してください。",
