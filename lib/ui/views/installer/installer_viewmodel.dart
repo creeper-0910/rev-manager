@@ -9,6 +9,7 @@ import 'package:revanced_manager/models/patch.dart';
 import 'package:revanced_manager/models/patched_application.dart';
 import 'package:revanced_manager/services/manager_api.dart';
 import 'package:revanced_manager/services/patcher_api.dart';
+import 'package:revanced_manager/services/toast.dart';
 import 'package:revanced_manager/ui/views/patcher/patcher_viewmodel.dart';
 import 'package:revanced_manager/ui/widgets/installerView/custom_material_button.dart';
 import 'package:stacked/stacked.dart';
@@ -17,6 +18,7 @@ import 'package:wakelock/wakelock.dart';
 class InstallerViewModel extends BaseViewModel {
   final ManagerAPI _managerAPI = locator<ManagerAPI>();
   final PatcherAPI _patcherAPI = locator<PatcherAPI>();
+  final Toast _toast = locator<Toast>();
   final PatchedApplication _app = locator<PatcherViewModel>().selectedApp!;
   final List<Patch> _patches = locator<PatcherViewModel>().selectedPatches;
   static const _installerChannel = MethodChannel(
@@ -214,5 +216,15 @@ class InstallerViewModel extends BaseViewModel {
         shareLog();
         break;
     }
+  }
+
+  Future<bool> onWillPop(BuildContext context) async {
+    if (isPatching) {
+      _toast.show('installerView.noExit');
+      return false;
+    }
+    cleanPatcher();
+    Navigator.of(context).pop();
+    return true;
   }
 }
