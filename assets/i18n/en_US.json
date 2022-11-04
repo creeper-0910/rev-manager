@@ -27,7 +27,7 @@
         "installingMessage": "アップデートをインストール中...",
         "errorDownloadMessage": "アップデートをダウンロード出来ませんでした",
         "errorInstallMessage": "アップデートをインストール出来ませんでした",
-        "noConnection": "ネットワーク接続がありません"
+        "noConnection": "ネットワーク接続がありません",
 		"updatesDisabled": "Updating a patched app is currently disabled. Repatch the app again."
     },
     "applicationItem": {
@@ -121,8 +121,8 @@
         "JapaneseOption": "日本語",
         "sourcesLabel": "ソース",
         "sourcesLabelHint": "カスタムソースの設定",
-        "orgPatchesLabel" : "パッチ提供元",
-        "sourcesPatchesLabel" : "パッチのソース",
+        "orgPatchesLabel": "パッチ提供元",
+        "sourcesPatchesLabel": "パッチのソース",
         "orgIntegrationsLabel": "Integrationsの提供元",
         "sourcesIntegrationsLabel": "Integrationsのソース",
         "sourcesResetDialogTitle": "リセット",
