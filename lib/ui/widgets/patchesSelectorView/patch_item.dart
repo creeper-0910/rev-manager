@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:revanced_manager/ui/widgets/installerView/custom_material_button.dart';
+import 'package:revanced_manager/app/app.locator.dart';
+import 'package:revanced_manager/services/manager_api.dart';
+import 'package:revanced_manager/services/toast.dart';
+import 'package:revanced_manager/ui/widgets/shared/custom_material_button.dart';
 import 'package:revanced_manager/ui/widgets/shared/custom_card.dart';
 
 // ignore: must_be_immutable
@@ -15,6 +18,8 @@ class PatchItem extends StatefulWidget {
   bool isSelected;
   final Function(bool) onChanged;
   final Widget? child;
+  final toast = locator<Toast>();
+  final _managerAPI = locator<ManagerAPI>();
 
   PatchItem(
       {Key? key,
@@ -40,8 +45,23 @@ class _PatchItemState extends State<PatchItem> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: CustomCard(
+        backgroundColor: widget.isUnsupported &&
+                widget._managerAPI.areExperimentalPatchesEnabled() == false
+            ? Theme.of(context).colorScheme.brightness == Brightness.light
+                ? Colors.grey[400]
+                : Colors.grey[700]
+            : null,
         onTap: () {
-          setState(() => widget.isSelected = !widget.isSelected);
+          setState(() {
+            if (widget.isUnsupported &&
+                !widget._managerAPI.areExperimentalPatchesEnabled()
+            ) {
+              widget.isSelected = false;
+              widget.toast.showBottom('patchItem.unsupportedPatchVersion');
+            } else {
+              widget.isSelected = !widget.isSelected;
+            }
+          });
           widget.onChanged(widget.isSelected);
         },
         child: Column(
@@ -58,13 +78,21 @@ class _PatchItemState extends State<PatchItem> {
                         children: <Widget>[
                           Text(
                             widget.simpleName,
+                            maxLines: 2,
+                            overflow: TextOverflow.visible,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          const SizedBox(width: 4),
-                          Text(widget.version)
+                          const SizedBox(width: 6),
+                          Text(
+                            widget.version,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -73,7 +101,12 @@ class _PatchItemState extends State<PatchItem> {
                         softWrap: true,
                         maxLines: 3,
                         overflow: TextOverflow.visible,
-                        style: const TextStyle(fontSize: 14),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
+                        ),
                       ),
                     ],
                   ),
@@ -90,7 +123,17 @@ class _PatchItemState extends State<PatchItem> {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     onChanged: (newValue) {
-                      setState(() => widget.isSelected = newValue!);
+                      setState(() {
+                        if (widget.isUnsupported &&
+                            !widget._managerAPI.areExperimentalPatchesEnabled()
+                        ) {
+                          widget.isSelected = false;
+                          widget.toast
+                              .showBottom('patchItem.unsupportedPatchVersion');
+                        } else {
+                          widget.isSelected = newValue!;
+                        }
+                      });
                       widget.onChanged(widget.isSelected);
                     },
                   ),
@@ -104,12 +147,12 @@ class _PatchItemState extends State<PatchItem> {
                         padding: const EdgeInsets.only(top: 8),
                         child: TextButton.icon(
                           label: I18nText('patchItem.unsupportedWarningButton'),
-                          icon: const Icon(Icons.warning),
+                          icon: const Icon(Icons.warning, size: 20.0),
                           onPressed: () => _showUnsupportedWarningDialog(),
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(8),
                                 side: BorderSide(
                                   width: 1,
                                   color:
@@ -147,7 +190,7 @@ class _PatchItemState extends State<PatchItem> {
           translationParams: {
             'packageVersion': widget.packageVersion,
             'supportedVersions':
-                '\u2022 ${widget.supportedPackageVersions.join('\n\u2022 ')}',
+                '\u2022 ${widget.supportedPackageVersions.reversed.join('\n\u2022 ')}',
           },
         ),
         actions: <Widget>[

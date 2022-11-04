@@ -104,52 +104,50 @@ class AppInfoView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              if (app.isRooted)
-                                VerticalDivider(
-                                  color: Theme.of(context).canvasColor,
-                                  indent: 12.0,
-                                  endIndent: 12.0,
-                                  width: 1.0,
-                                ),
-                              if (app.isRooted)
-                                Expanded(
-                                  child: Material(
-                                    type: MaterialType.transparency,
-                                    child: InkWell(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                      onTap: () => model.showUninstallDialog(
-                                        context,
-                                        app,
-                                        false,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.delete_outline,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
-                                          const SizedBox(height: 10),
-                                          I18nText(
-                                            'appInfoView.uninstallButton',
-                                            child: Text(
-                                              '',
-                                              style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                              VerticalDivider(
+                                color: Theme.of(context).canvasColor,
+                                indent: 12.0,
+                                endIndent: 12.0,
+                                width: 1.0,
+                              ),
+                              Expanded(
+                                child: Material(
+                                  type: MaterialType.transparency,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    onTap: () => model.showUninstallDialog(
+                                      context,
+                                      app,
+                                      false,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.delete_outline,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        I18nText(
+                                          'appInfoView.uninstallButton',
+                                          child: Text(
+                                            '',
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
+                              ),
                               VerticalDivider(
                                 color: Theme.of(context).canvasColor,
                                 indent: 12.0,
@@ -162,8 +160,9 @@ class AppInfoView extends StatelessWidget {
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(16.0),
                                     onTap: () {
-                                      model.navigateToPatcher(app);
-                                      Navigator.of(context).pop();
+                                      model.updateNotImplemented(context);
+                                      // model.navigateToPatcher(app);
+                                      // Navigator.of(context).pop();
                                     },
                                     child: Column(
                                       mainAxisAlignment:
@@ -260,6 +259,22 @@ class AppInfoView extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(app.packageName),
+                    ),
+                    const SizedBox(height: 4),
+                    ListTile(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 20.0),
+                      title: I18nText(
+                        'appInfoView.originalPackageNameLabel',
+                        child: const Text(
+                          '',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      subtitle: Text(app.originalPackageName),
                     ),
                     const SizedBox(height: 4),
                     ListTile(

@@ -55,6 +55,25 @@ class _PatchesSelectorViewState extends State<PatchesSelectorView> {
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
+              actions: [
+                Container(
+                  height: 2,
+                  margin: const EdgeInsets.only(right: 16, top: 12, bottom: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                  decoration: BoxDecoration(
+                    color:
+                        Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    model.patchesVersion!,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.headline6!.color,
+                    ),
+                  ),
+                ),
+              ],
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(64.0),
                 child: Padding(
@@ -73,7 +92,12 @@ class _PatchesSelectorViewState extends State<PatchesSelectorView> {
                         _query = searchQuery;
                       });
                     },
-                    onSelectAll: (value) => model.selectAllPatches(value),
+                    onSelectAll: (value) {
+                      if (value) {
+                        model.selectAllPatcherWarning(context);
+                      }
+                      model.selectAllPatches(value);
+                    },
                   ),
                 ),
               ),

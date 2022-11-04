@@ -15,7 +15,8 @@ import 'package:revanced_manager/services/patcher_api.dart';
 import 'package:revanced_manager/services/toast.dart';
 import 'package:revanced_manager/ui/views/navigation/navigation_viewmodel.dart';
 import 'package:revanced_manager/ui/views/patcher/patcher_viewmodel.dart';
-import 'package:revanced_manager/ui/widgets/installerView/custom_material_button.dart';
+import 'package:revanced_manager/ui/widgets/shared/custom_material_button.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -28,7 +29,7 @@ class HomeViewModel extends BaseViewModel {
   final Toast _toast = locator<Toast>();
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   DateTime? _lastUpdate;
-  bool showUpdatableApps = true;
+  bool showUpdatableApps = false;
   List<PatchedApplication> patchedInstalledApps = [];
   List<PatchedApplication> patchedUpdatableApps = [];
 
@@ -94,7 +95,8 @@ class HomeViewModel extends BaseViewModel {
         int currentVersionInt =
             int.parse(currentVersion.replaceAll(RegExp('[^0-9]'), ''));
         return latestVersionInt > currentVersionInt;
-      } on Exception {
+      } on Exception catch (e, s) {
+        await Sentry.captureException(e, stackTrace: s);
         return false;
       }
     }
@@ -135,9 +137,14 @@ class HomeViewModel extends BaseViewModel {
       } else {
         _toast.show('homeView.errorDownloadMessage');
       }
-    } on Exception {
+    } on Exception catch (e, s) {
+      await Sentry.captureException(e, stackTrace: s);
       _toast.show('homeView.errorInstallMessage');
     }
+  }
+
+  void updatesAreDisabled() {
+    _toast.show('homeView.updatesDisabled');
   }
 
   Future<void> showUpdateConfirmationDialog(BuildContext parentContext) async {
@@ -176,7 +183,7 @@ class HomeViewModel extends BaseViewModel {
   Future<void> forceRefresh(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 1));
     if (_lastUpdate == null ||
-        _lastUpdate!.difference(DateTime.now()).inSeconds > 60) {
+        _lastUpdate!.difference(DateTime.now()).inSeconds > 2) {
       _managerAPI.clearAllData();
     }
     initialize(context);
